@@ -157,11 +157,11 @@ def generate_gcode(filename):
 
                     if x >= 0 and x <= bed_max_x and y >= 0 and y <= bed_max_y:
                         if new_shape:
-                            gcode += "G0 X%0.1f Y%0.1f\n" % (x, y)
-                            gcode += "M03\n"
+                            gcode += "G1 X%0.1f Y%0.1f f2000\n" % (x, y)
+                            gcode += "M03 S0\n"
                             new_shape = False
                         else:
-                            gcode += "G0 X%0.1f Y%0.1f\n" % (x, y)
+                            gcode += "G1 X%0.2f Y%0.2f f2000\n" % (x, y)
                         log += debug_log("\t    --Point printed")
                     else:
                         log += debug_log(
