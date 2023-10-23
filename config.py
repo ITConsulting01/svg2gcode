@@ -23,7 +23,7 @@ shape_postamble = "G4 P0.2\nM03 S255 "
 bed_max_x = 210
 
 '''Print bed height in mm'''
-bed_max_y = 210
+bed_max_y = 234
 
 ''' Used to control the smoothness/sharpness of the curves.
     Smaller the value greater the sharpness. Make sure the
