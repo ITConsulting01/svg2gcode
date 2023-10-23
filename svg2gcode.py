@@ -74,11 +74,14 @@ def generate_gcode(filename):
     if type(width) == str:
         width = width.replace("pt", "")
         width = width.replace("px", "")
+        width = width.replace("mm", "")
+        width = width.replace("%", "")
 
     if type(height) == str:
         height = height.replace("pt", "")
         height = height.replace("px", "")
-
+        height = height.replace("mm", "")
+        height = height.replace("%", "")
     # Scale the file appropriately
     # (Will never distort image - always scales evenly)
     # ASSUMES: Y ASIX IS LONG AXIS
@@ -157,7 +160,7 @@ def generate_gcode(filename):
 
                     if x >= 0 and x <= bed_max_x and y >= 0 and y <= bed_max_y:
                         if new_shape:
-                            gcode += "G1 X%0.1f Y%0.1f f2000\n" % (x, y)
+                            gcode += "G1 X%0.2f Y%0.2f f2000\n" % (x, y)
                             gcode += "M03 S0\n"
                             new_shape = False
                         else:
