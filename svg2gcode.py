@@ -162,14 +162,14 @@ def generate_gcode(filename):
 
                     if x >= 0 and x <= bed_max_x and y >= 0 and y <= bed_max_y:
                         if z > 0:
-                            gcode += "M03 S100\n G4 P0.5 \n G00 x{} y{} f2000\n".format(x, y)
+                            gcode += "M03 S100\n G4 P0.5 f3000\n G00 x{} y{} \n".format(x, y)
                             new_shape = 1
                         else:
                             if new_shape == 1:
                                 gcode += "M03 S0\n G4 P0.1"
                                 new_shape = 0
 
-                            gcode += "G01 x{} y{} f2500\n".format(x, y)
+                            gcode += "G01 x{} y{} f2750\n".format(x, y)
 
                     else:
                         log += debug_log(
