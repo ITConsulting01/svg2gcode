@@ -161,9 +161,9 @@ def generate_gcode(filename):
 
                     if x >= 0 and x <= bed_max_x and y >= 0 and y <= bed_max_y:
                         if z > 0:
-                            gcode += "M03 S150\n G4 P0.1 \n G00 x{} y{} f2000\n".format(x, y)
+                            gcode += "M03 S150\n G4 P0.2 \n G00 x{} y{} f2000\n".format(x, y)
                         else:
-                            gcode += "M03 S0\n G01 x{} y{} f1500\n".format(x, y)
+                            gcode += "M03 S0 G4 P0.1\n G01 x{} y{} f1500\n".format(x, y)
 
                     else:
                         log += debug_log(
