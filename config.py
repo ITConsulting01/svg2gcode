@@ -11,7 +11,7 @@ preamble = "G28\nG1 Z0.0\nM03 S255"
 postamble = "G28 M03 S255"
 
 '''G-code emitted before processing a SVG shape'''
-shape_preamble = "G4 P0.2\n M03 S0"
+shape_preamble = ""  #"G4 P0.2\n M03 S0"
 
 '''G-code emitted after processing a SVG shape'''
 shape_postamble = "G4 P0.2\nM03 S255 "
