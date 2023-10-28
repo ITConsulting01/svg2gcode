@@ -152,6 +152,7 @@ def generate_gcode(filename):
                 log += debug_log("\tPoints: " + str(points))
 
                 for x, y, z in points:
+                    new_shape = 0
                     # log += debug_log("\t  pt: "+str((x,y)))
 
                     x = scale * x
@@ -161,8 +162,13 @@ def generate_gcode(filename):
 
                     if x >= 0 and x <= bed_max_x and y >= 0 and y <= bed_max_y:
                         if z > 0:
-                            gcode += "M03 S100\n G4 P0.5 \n G00 x{} y{} f2000\n M03 S0\n G4 P0.1\n".format(x, y)
+                            gcode += "M03 S100\n G4 P0.5 \n G00 x{} y{} f2000\n".format(x, y)
+                            new_shape = 1
                         else:
+                            if new_shape == 1:
+                                gcode += "M03 S0\n G4 P0.1"
+                                new_shape = 0
+
                             gcode += "G01 x{} y{} f1500\n".format(x, y)
 
                     else:
@@ -226,6 +232,10 @@ def text_point_generator(text_vect_str):
                 xyz.append(0)
 
             pts.append(xyz)
+
+    for p in pts:
+        if p[0] == 0 and p[1] == 0:
+            pts.remove(p)
 
 
 
