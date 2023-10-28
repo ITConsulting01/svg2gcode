@@ -150,9 +150,9 @@ def generate_gcode(filename):
                 points = text_point_generator(d)
 
                 log += debug_log("\tPoints: " + str(points))
-
+                new_shape = 0
                 for x, y, z in points:
-                    new_shape = 0
+
                     # log += debug_log("\t  pt: "+str((x,y)))
 
                     x = scale * x
