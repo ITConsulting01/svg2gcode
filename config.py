@@ -5,13 +5,13 @@
 
 
 '''G-code emitted at the start of processing the SVG file'''
-preamble = "G92 x0 y0 z0 \nG28\nG1 Z0.0\nM03 S0"
+preamble = "G28\nG1 Z0.0\nM03 S255"
 
 '''G-code emitted at the end of processing the SVG file'''
-postamble = "G28M03 M03 S255"
+postamble = "G28 M03 S255"
 
 '''G-code emitted before processing a SVG shape'''
-shape_preamble = "G4 P0.2"
+shape_preamble = "G4 P0.2\n M03 S0"
 
 '''G-code emitted after processing a SVG shape'''
 shape_postamble = "G4 P0.2\nM03 S255 "
