@@ -169,7 +169,7 @@ def generate_gcode(filename):
                                 gcode += "M03 S0\n G4 P0.1"
                                 new_shape = 0
 
-                            gcode += "G01 x{} y{} f1500\n".format(x, y)
+                            gcode += "G01 x{} y{} f2500\n".format(x, y)
 
                     else:
                         log += debug_log(
