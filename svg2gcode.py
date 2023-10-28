@@ -108,7 +108,7 @@ def generate_gcode(filename):
     # Iterate through svg elements
     for elem in root.iter():
         log += debug_log("--Found Elem: " + str(elem))
-        new_shape = True
+       
         try:
             tag_suffix = elem.tag.split("}")[-1]
         except:
@@ -150,7 +150,7 @@ def generate_gcode(filename):
                 points = text_point_generator(d)
 
                 log += debug_log("\tPoints: " + str(points))
-                new_shape = 0
+                new_shape = 1
                 for x, y, z in points:
 
                     # log += debug_log("\t  pt: "+str((x,y)))
@@ -160,25 +160,17 @@ def generate_gcode(filename):
 
                     log += debug_log("\t  pt: " + str((x, y)))
 
-                    if x >= 0 and x <= bed_max_x and y >= 0 and y <= bed_max_y:
-                        if z > 0:
-                            gcode += "M03 S100\n G4 P0.5 f3000\n G00 x{} y{} \n".format(x, y)
-                            new_shape = 1
-                        else:
-                            if new_shape == 1:
-                                gcode += "M03 S0\n G4 P0.1"
-                                new_shape = 0
 
-                            gcode += "G01 x{} y{} f2750\n".format(x, y)
-
+                    if z > 0:
+                        gcode += "M03 S100\n G4 P0.5 f3000\n G00 x{} y{} \n".format(x, y)
+                        new_shape = 1
                     else:
-                        log += debug_log(
-                            "\t    --POINT NOT PRINTED ("
-                            + str(bed_max_x)
-                            + ","
-                            + str(bed_max_y)
-                            + ")"
-                        )
+                        if new_shape == 1:
+                            gcode += "M03 S0\n G4 P0.1"
+                            new_shape = 0
+
+                        gcode += "G01 x{} y{} f2750\n".format(x, y)
+
                 gcode += shape_postamble + "\n"
             else:
                 log += debug_log("\tNO PATH INSTRUCTIONS FOUND!!")
@@ -232,10 +224,6 @@ def text_point_generator(text_vect_str):
                 xyz.append(0)
 
             pts.append(xyz)
-
-    for p in pts:
-        if p[0] == 0 and p[1] == 0:
-            pts.remove(p)
 
 
 
